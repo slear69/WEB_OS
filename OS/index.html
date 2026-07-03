@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyOS</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div id="desktop">
+
+    <div class="icon" onclick="openWindow('files')">
+        <img src="images/small_folder.png" class="desktopIcon">
+        <span>Files</span>
+    </div>
+
+    <div class="icon" onclick="openWindow('browser')">
+        <img src="images/broswer.png" class="desktopIcon">
+        <span>Browser</span>
+    </div>
+
+    <div class="icon" onclick="openWindow('notes')">
+        <img src="images/note.png" class="desktopIcon">
+        <span>Notes</span>
+    </div>
+
+</div>
+"taskbar"
+
+<div class="window" id="files" style="top:120px; left:180px;">
+
+    <div class="windowHeader" id="filesheader">
+
+        <span>📁 File Explorer</span>
+
+        <div class="windowButtons">
+
+            <button onclick="closeWindow('files')">✕</button>
+
+        </div>
+
+    </div>
+
+    <div class="windowContent">
+
+        <div id="fileList"></div>
+
+    </div>
+
+</div>
+
+
+<div id="browser" class="window">
+
+    <div class="titlebar">
+
+        Browser
+
+        <button onclick="closeWindow('browser')">X</button>
+
+    </div>
+
+    <div class="content">
+
+        <input
+            id="url"
+            placeholder="https://www.bilibili.tv/en/video/4790502645433344"
+        >
+
+        <button onclick="openWebsite()">
+            Go
+        </button>
+
+        <iframe id="browserFrame"></iframe>
+
+    </div>
+
+</div>
+
+
+<div id="notes" class="window">
+
+    <div class="titlebar">
+
+        Notes
+
+        <button onclick="closeWindow('notes')">X</button>
+
+    </div>
+
+    <div class="content">
+
+        <textarea id="notesArea"></textarea>
+
+    </div>
+
+</div>
+
+
+
+<div id="startMenu">
+
+    <button onclick="openWindow('files')">Files</button>
+
+    <button onclick="openWindow('browser')">Browser</button>
+
+    <button onclick="openWindow('notes')">Notes</button>
+
+</div>
+
+
+<!-- 1. The detailed taskbar structure comes first -->
+<div id="taskbar">
+    <div id="taskbar-left">
+        <button id="startButton" onclick="toggleStart()">⊞</button>
+        <button class="taskIcon" onclick="openWindow('files')">
+            <img src="images/mini_folder.png" class="desktopIcon">
+        </button>
+        <button class="taskIcon" onclick="openWindow('browser')">
+            <img src="images/mini_browser.png" class="desktopIcon">
+        </button>
+        <button class="taskIcon" onclick="openWindow('notes')">
+            <img src="images/mini_notes.png" class="desktopIcon">
+        </button>
+    </div>
+
+    <div id="taskbar-right">
+        <span id="clock"></span>
+    </div>
+</div>
+
+<!-- 2. Your music player content goes here -->
+<div id="musicPlayer">
+    <div id="songName">Song 1</div>
+    <img id="songCover" src="images/Cyberpunk 2077_ Radio, Vol (1). 2 (Original Soundtrack).jpg" alt="Song Cover" style="width: 100%; border-radius: 8px; margin-bottom: 10px;">
+    <div class="controls">
+        <button onclick="playSong()">▶</button>
+        <button onclick="pauseSong()">⏸</button>
+        <button onclick="skipSong()">⏭</button>
+    </div>
+</div>
+
+<!-- 3. The script goes at the VERY BOTTOM so the elements above load first -->
+<script src="script.js"></script>
+</body>
+</html>

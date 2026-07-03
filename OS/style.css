@@ -1,0 +1,410 @@
+body {
+    margin: 0;
+    overflow: hidden;
+
+    background-image: url("images/david.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#desktop{
+
+width:100vw;
+
+height:100vh;
+
+padding:20px;
+
+}
+
+.icon{
+
+width:70px;
+
+text-align:center;
+
+color:white;
+
+cursor:pointer;
+
+margin-bottom:20px;
+
+}
+
+.icon span{
+
+display:block;
+
+margin-top:5px;
+
+}
+
+.window{
+
+display:none;
+
+position:absolute;
+
+top:80px;
+
+left:150px;
+
+width:600px;
+
+height:400px;
+
+background:white;
+
+border-radius:10px;
+
+overflow:hidden;
+
+box-shadow:0 0 15px black;
+
+}
+
+.titlebar{
+
+background:#1f2937;
+
+color:white;
+
+padding:10px;
+
+display:flex;
+
+justify-content:space-between;
+
+}
+
+.content{
+
+height:calc(100% - 40px);
+
+padding:10px;
+
+}
+
+iframe{
+
+width:100%;
+
+height:100%;
+
+border:none;
+
+}
+
+textarea{
+
+width:100%;
+
+height:100%;
+
+resize:none;
+
+}
+
+#taskbar{
+
+position:fixed;
+
+bottom:0;
+
+width:100%;
+
+height:45px;
+
+background:#222;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:0 10px;
+
+}
+
+#taskbar button{
+
+height:35px;
+
+}
+
+#clock{
+
+color:white;
+
+}
+
+#startMenu{
+
+display:none;
+
+position:fixed;
+
+bottom:50px;
+
+left:10px;
+
+background:white;
+
+padding:10px;
+
+border-radius:10px;
+
+box-shadow:0 0 10px black;
+
+}
+
+#startMenu button{
+
+display:block;
+
+margin:5px;
+
+width:150px;
+
+}
+#taskbar{
+
+    position:fixed;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    height:52px;
+
+    background:rgba(30,30,30,.75);
+
+    backdrop-filter:blur(20px);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 10px;
+
+    box-sizing:border-box;
+
+    border-top:1px solid rgba(255,255,255,.15);
+
+}
+
+#taskbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+#taskbar-right{
+
+    color:white;
+
+    font-size:14px;
+
+}
+
+#startButton,
+.taskIcon{
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:transparent;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+#startButton:hover,
+.taskIcon:hover{
+
+    background:rgba(255,255,255,.15);
+
+}
+
+#startButton:active,
+.taskIcon:active{
+
+    transform:scale(.9);
+
+}
+.window{
+
+    position:absolute;
+
+    width:700px;
+
+    height:450px;
+
+    background:white;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    display:none;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+
+}
+
+.windowHeader{
+
+    height:40px;
+
+    background:#20293a;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 15px;
+
+    cursor:grab;
+
+    user-select:none;
+
+}
+
+.windowButtons button{
+
+    background:#ff5f57;
+
+    border:none;
+
+    color:white;
+
+    width:25px;
+
+    height:25px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+}
+
+.windowContent{
+
+    padding:15px;
+
+}
+
+#fileList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fileItem {
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    background: rgba(0,0,0,0.05);
+}
+
+.fileItem:hover {
+    background: rgba(0,0,0,0.1);
+}
+#musicPlayer{
+    position:fixed;
+    top:15px;
+    right:15px;
+
+    width:180px;
+
+    background:rgba(25,25,25,.75);
+    backdrop-filter:blur(15px);
+
+    border:1px solid #00ffff;
+    border-radius:12px;
+
+    padding:10px;
+
+    color:white;
+    font-family:Arial;
+    text-align:center;
+
+    box-shadow:0 0 15px #00ffff55;
+    z-index:9999;
+}
+
+#songName{
+    margin-bottom:10px;
+    font-size:15px;
+}
+
+.controls button{
+    width:45px;
+    height:35px;
+
+    border:none;
+    border-radius:8px;
+
+    background:#00bcd4;
+    color:white;
+    cursor:pointer;
+    margin:2px;
+
+    transition:.2s;
+}
+
+.controls button:hover{
+    background:#00e5ff;
+}
+
+.controls button:active{
+    transform:scale(.9);
+}
+#musicPlayer {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+
+    /* Increased width slightly to fit the image comfortably */
+    width: 200px; 
+
+    background: rgba(25, 25, 25, .75);
+    backdrop-filter: blur(15px);
+
+    border: 1px solid #00ffff;
+    border-radius: 12px;
+
+    padding: 12px;
+
+    color: white;
+    font-family: Arial;
+    text-align: center;
+
+    box-shadow: 0 0 15px #00ffff55;
+    z-index: 9999;
+}
