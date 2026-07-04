@@ -2,146 +2,115 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyOS</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-<div id="desktop">
-
-    <div class="icon" onclick="openWindow('files')">
-        <img src="images/small_folder.png" class="desktopIcon">
-        <span>Files</span>
+    <div id="bootScreen">
+        <div id="bootContent">
+            <h1 class="glitchText" data-text="FutureOS">FutureOS</h1>
+            <p class="bootSubtitle">WE ALL LOVE CYBERPUNK</p>
+            <div id="terminalLog"></div>
+        </div>
     </div>
 
-    <div class="icon" onclick="openWindow('browser')">
-        <img src="images/broswer.png" class="desktopIcon">
-        <span>Browser</span>
-    </div>
-
-    <div class="icon" onclick="openWindow('notes')">
-        <img src="images/note.png" class="desktopIcon">
-        <span>Notes</span>
-    </div>
-
-</div>
-"taskbar"
-
-<div class="window" id="files" style="top:120px; left:180px;">
-
-    <div class="windowHeader" id="filesheader">
-
-        <span>📁 File Explorer</span>
-
-        <div class="windowButtons">
-
-            <button onclick="closeWindow('files')">✕</button>
-
+    <div id="desktop">
+        <div class="icon" data-window="files">
+            <img src="images/small_folder.png" class="desktopIcon" alt="Files icon">
+            <span>Files</span>
         </div>
 
+        <div class="icon" data-window="browser">
+            <img src="images/broswer.png" class="desktopIcon" alt="Browser icon">
+            <span>Browser</span>
+        </div>
+
+        <div class="icon" data-window="notes">
+            <img src="images/note.png" class="desktopIcon" alt="Notes icon">
+            <span>Notes</span>
+        </div>
     </div>
 
-    <div class="windowContent">
-
-        <div id="fileList"></div>
-
+    <div class="window" id="files" style="top:120px; left:180px;">
+        <div class="windowHeader">
+            <span>📁 File Explorer</span>
+            <div class="windowButtons">
+                <button type="button" data-close-window="files">✕</button>
+            </div>
+        </div>
+        <div class="windowContent">
+            <div id="fileList"></div>
+        </div>
     </div>
 
-</div>
-
-
-<div id="browser" class="window">
-
-    <div class="titlebar">
-
-        Browser
-
-        <button onclick="closeWindow('browser')">X</button>
-
+    <div class="window" id="browser" style="top:90px; left:220px;">
+        <div class="windowHeader">
+            <span>🌐 Browser</span>
+            <div class="windowButtons">
+                <button type="button" data-close-window="browser">✕</button>
+            </div>
+        </div>
+        <div class="windowContent browserContent">
+            <div class="browserToolbar">
+                <input id="url" type="text" placeholder="https://www.bilibili.tv/en/video/4790502645433344">
+                <button id="openWebsiteButton" type="button">Go</button>
+            </div>
+            <iframe id="browserFrame" title="Web browser"></iframe>
+        </div>
     </div>
 
-    <div class="content">
-
-        <input
-            id="url"
-            placeholder="https://www.bilibili.tv/en/video/4790502645433344"
-        >
-
-        <button onclick="openWebsite()">
-            Go
-        </button>
-
-        <iframe id="browserFrame"></iframe>
-
+    <div class="window" id="notes" style="top:110px; left:240px;">
+        <div class="windowHeader">
+            <span>📝 Notes</span>
+            <div class="windowButtons">
+                <button type="button" data-close-window="notes">✕</button>
+            </div>
+        </div>
+        <div class="windowContent notesContent">
+            <textarea id="notesArea" aria-label="Notes editor"></textarea>
+        </div>
     </div>
 
-</div>
-
-
-<div id="notes" class="window">
-
-    <div class="titlebar">
-
-        Notes
-
-        <button onclick="closeWindow('notes')">X</button>
-
+    <div id="startMenu" aria-label="Start menu">
+        <button type="button" data-window="files">Files</button>
+        <button type="button" data-window="browser">Browser</button>
+        <button type="button" data-window="notes">Notes</button>
     </div>
 
-    <div class="content">
+    <div id="taskbar">
+        <div id="taskbar-left">
+            <button id="startButton" type="button" aria-label="Open start menu">⊞</button>
+            <button class="taskIcon" type="button" data-window="files">
+                <img src="images/mini_folder.png" class="desktopIcon" alt="File explorer shortcut">
+            </button>
+            <button class="taskIcon" type="button" data-window="browser">
+                <img src="images/mini_browser.png" class="desktopIcon" alt="Browser shortcut">
+            </button>
+            <button class="taskIcon" type="button" data-window="notes">
+                <img src="images/mini_notes.png" class="desktopIcon" alt="Notes shortcut">
+            </button>
+            <!-- Inside <div id="taskbar-left"> in index.html -->
+            <button id="glitchCursorButton" class="taskIcon" type="button" title="Toggle Glitch Cursor">
+                ✨
+            </button>
+        </div>
 
-        <textarea id="notesArea"></textarea>
-
+        <div id="taskbar-right">
+            <span id="clock" aria-live="polite"></span>
+        </div>
     </div>
 
-</div>
-
-
-
-<div id="startMenu">
-
-    <button onclick="openWindow('files')">Files</button>
-
-    <button onclick="openWindow('browser')">Browser</button>
-
-    <button onclick="openWindow('notes')">Notes</button>
-
-</div>
-
-
-<!-- 1. The detailed taskbar structure comes first -->
-<div id="taskbar">
-    <div id="taskbar-left">
-        <button id="startButton" onclick="toggleStart()">⊞</button>
-        <button class="taskIcon" onclick="openWindow('files')">
-            <img src="images/mini_folder.png" class="desktopIcon">
-        </button>
-        <button class="taskIcon" onclick="openWindow('browser')">
-            <img src="images/mini_browser.png" class="desktopIcon">
-        </button>
-        <button class="taskIcon" onclick="openWindow('notes')">
-            <img src="images/mini_notes.png" class="desktopIcon">
-        </button>
+    <div id="musicPlayer">
+        <div id="songName">Song 1</div>
+        <img id="songCover" src="images/Cyberpunk 2077_ Radio, Vol (1). 2 (Original Soundtrack).jpg" alt="Song cover" class="songCover">
+        <div class="controls">
+            <button id="playButton" type="button">▶</button>
+            <button id="pauseButton" type="button">⏸</button>
+            <button id="skipButton" type="button">⏭</button>
+        </div>
     </div>
 
-    <div id="taskbar-right">
-        <span id="clock"></span>
-    </div>
-</div>
-
-<!-- 2. Your music player content goes here -->
-<div id="musicPlayer">
-    <div id="songName">Song 1</div>
-    <img id="songCover" src="images/Cyberpunk 2077_ Radio, Vol (1). 2 (Original Soundtrack).jpg" alt="Song Cover" style="width: 100%; border-radius: 8px; margin-bottom: 10px;">
-    <div class="controls">
-        <button onclick="playSong()">▶</button>
-        <button onclick="pauseSong()">⏸</button>
-        <button onclick="skipSong()">⏭</button>
-    </div>
-</div>
-
-<!-- 3. The script goes at the VERY BOTTOM so the elements above load first -->
-<script src="script.js"></script>
+    <script src="script.new.js"></script>
 </body>
 </html>
