@@ -360,3 +360,33 @@ textarea {
     filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
     transition: transform 0.05s linear;
 }
+.window{
+    position:absolute;
+    width:700px;
+    height:450px;
+
+    background:rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.25);
+
+    border-radius:18px;
+
+    overflow:hidden;
+    display:none;
+
+    box-shadow:
+        0 10px 40px rgba(0,0,0,.45),
+        inset 0 1px rgba(255,255,255,.25);
+}
+.windowHeader{
+    background:rgba(20,25,35,.45);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    color:white;
+
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
