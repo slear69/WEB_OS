@@ -43,7 +43,50 @@
             <div id="fileList"></div>
         </div>
     </div>
+    <div class="window" id="calculator" style="top:130px; left:260px;">
+        <div class="windowHeader">
+            <span>🧮 Calculator</span>
+            <div class="windowButtons">
+                <button type="button" data-close-window="calculator">✕</button>
+            </div>
+        </div>
 
+        <div class="windowContent calculatorContent">
+
+            <input type="text" id="calcDisplay" readonly>
+
+            <div class="calculatorGrid">
+
+                <button class="calcBtn function" onclick="calcClear()">C</button>
+                <button class="calcBtn function" onclick="calcDelete()">⌫</button>
+
+                <button class="calcBtn operator" onclick="calcPress('%')">%</button>
+                <button class="calcBtn operator" onclick="calcPress('/')">÷</button>
+
+                <button class="calcBtn" onclick="calcPress('7')">7</button>
+                <button class="calcBtn" onclick="calcPress('8')">8</button>
+                <button class="calcBtn" onclick="calcPress('9')">9</button>
+                <button class="calcBtn operator" onclick="calcPress('*')">×</button>
+
+                <button class="calcBtn" onclick="calcPress('4')">4</button>
+                <button class="calcBtn" onclick="calcPress('5')">5</button>
+                <button class="calcBtn" onclick="calcPress('6')">6</button>
+                <button class="calcBtn operator" onclick="calcPress('-')">−</button>
+
+                <button class="calcBtn" onclick="calcPress('1')">1</button>
+                <button class="calcBtn" onclick="calcPress('2')">2</button>
+                <button class="calcBtn" onclick="calcPress('3')">3</button>
+                <button class="calcBtn operator" onclick="calcPress('+')">+</button>
+
+                <button class="calcBtn zero" onclick="calcPress('0')">0</button>
+                <button class="calcBtn" onclick="calcPress('.')">.</button>
+
+                <button class="calcBtn equals" onclick="calculate()">=</button>
+
+            </div>
+
+        </div>
+    </div>
     <div class="window" id="browser" style="top:90px; left:220px;">
         <div class="windowHeader">
             <span>🌐 Browser</span>
@@ -90,7 +133,6 @@
             <button class="taskIcon" type="button" data-window="notes">
                 <img src="images/mini_notes.png" class="desktopIcon" alt="Notes shortcut">
             </button>
-            <!-- Inside <div id="taskbar-left"> in index.html -->
             <button id="glitchCursorButton" class="taskIcon" type="button" title="Toggle Glitch Cursor">
                 ✨
             </button>
