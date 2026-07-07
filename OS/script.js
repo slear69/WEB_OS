@@ -7,6 +7,12 @@ const files = [
     { name: "Secret.txt", content: "👀 hidden file" }
 ];
 
+
+
+
+
+
+
 const playlist = [
     {
         title: "Who's Ready for Tomorrow",
@@ -19,6 +25,13 @@ const playlist = [
         coverSrc: "images/Cyberpunk_ Edgerunners (Original Series Soundtrack).jpg"
     }
 ];
+
+
+
+
+
+
+
 
 const bootLines = [
     { text: "CRITICAL: Initializing forced deck override...", delayAfter: 300 },
@@ -201,6 +214,10 @@ function initApp() {
         }
     }
 
+
+
+
+
     function playSong() {
         song.play().catch(() => {});
     }
@@ -224,6 +241,12 @@ function initApp() {
         pauseButton?.addEventListener("click", pauseSong);
         skipButton?.addEventListener("click", skipSong);
     }
+
+
+
+
+
+
 
     function typeBootSequence() {
         if (!terminalLog) return;
