@@ -1,27 +1,23 @@
-:root {
-    color-scheme: dark;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
+*{
     margin: 0;
+    padding: 0;
+}
+body{
+    -ms-user-select: none;
+    user-select: none;
     overflow: hidden;
-    font-family: Arial, sans-serif;
-    background-image: url("images/david.jpg");
+}
+.background{
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    background-image: url('image/wallpeapr.png'); 
+    
+    /* 2. These two lines make sure the image stretches to fit nicely */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
-
-#desktop {
-    width: 100vw;
-    height: 100vh;
-    padding: 20px;
-}
-
 .icon {
     width: 70px;
     text-align: center;
@@ -30,363 +26,196 @@ body {
     margin-bottom: 20px;
 }
 
-.icon span {
-    display: block;
-    margin-top: 5px;
-}
-
-.window {
-    position: absolute;
-    width: 700px;
-    height: 450px;
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    display: none;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-.windowHeader {
-    height: 40px;
-    background: #20293a;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 15px;
-    cursor: grab;
+.windoll{
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     user-select: none;
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    border: solid; 
+    width: 500px;
+    height: 500px; 
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(237, 232, 232, 0.4);
+    display: none;
+   
 }
-
-.windowButtons button {
-    background: #ff5f57;
-    border: none;
-    color: white;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.windowContent {
-    padding: 15px;
-    height: calc(100% - 40px);
-}
-
-.browserContent {
+.topbar
+{
+    
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    position: absolute;
+    top: 0px;
+    left: 0px; 
+    width: 100%; 
+    display: flex; 
+    backdrop-filter: blur(10px); 
+    background-color: rgba(0, 0, 0, 0.25); 
+    color: #fff; 
+    justify-content: space-between;
+    border-radius: 20px;
 }
-
-.browserToolbar {
-    display: flex;
-    gap: 8px;
+.welcome{
+    
+    font-size: 16px;
+    padding: 10px;
+    
 }
-
-.browserToolbar input {
-    flex: 1;
-    padding: 8px;
+.closebutton {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  background-color: #EC6B5E;
+  border-radius: 16px;
+  border: solid 1px rgba(0, 0, 0, 0.25);
+  margin-left: 6px;
 }
-
-.browserToolbar button {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 8px;
-    background: #00bcd4;
-    color: white;
-    cursor: pointer;
+.worckbar{
+    left: 97%;
+    flex-direction: row;
+    position: absolute;
+    align-items: center;
+    height:100%;
+    width: 40px;
+    background:rgb(1, 22, 62);
+    bottom:0px;
+    padding: 0 10px;
 }
-
-iframe {
-    width: 100%;
-    flex: 1;
-    border: none;
-    background: white;
-}
-
-.notesContent {
+.notes{
     height: calc(100% - 40px);
+    flex: 1; background: rgba(212,175,55,0.05);
+    border: 1px solid rgba(212,175,55,0.2); border-radius: 3px;
+    color: #d4af37; font-family: Georgia, serif; font-size: 12px;
+    padding: 7px 10px; outline: none; transition: border-color 0.2s;
+    user-select: text;
 }
-
 textarea {
+   background: #1e1e1e;
+    color: white;      /* or #00ffff */
     width: 100%;
     height: 100%;
     resize: none;
-    border: 1px solid #ccc;
+    border: 1px solid #020d34;
     border-radius: 8px;
     padding: 10px;
+    caret-color: white;
 }
-
-#fileList {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.files{
+    background: rgba(255,255,255,0.12);
+    position: absolute; 
+    top: 8%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    border: solid;
+    border-width: 1px ; 
+    width: 480px;
+    height: 30px; 
+    box-shadow: 0 10px 30px rgba(237, 232, 232, 0.4);
 }
-
-.fileItem {
-    padding: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.05);
+.font{
+    font-family: Courier, monospace;
+    font-size: medium;
+    color: #020d34;
 }
-
-.fileItem:hover {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-#taskbar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 52px;
-    background: rgba(30, 30, 30, 0.75);
-    backdrop-filter: blur(20px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-    box-sizing: border-box;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    z-index: 1000;
-}
-
-#taskbar-left {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-#taskbar-right {
-    color: white;
-    font-size: 14px;
-}
-
-#startButton,
-.taskIcon {
-    width: 40px;
-    height: 40px;
-    border: none;
+.filesf{
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    user-select: none;
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    border: solid; 
+    width: 500px;
+    height: 500px; 
     border-radius: 10px;
-    background: transparent;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    transition: 0.2s;
+    box-shadow: 0 10px 30px rgba(237, 232, 232, 0.4);
 }
-
-#startButton:hover,
-.taskIcon:hover {
-    background: rgba(255, 255, 255, 0.15);
+.back{
+  margin-top: 16px;
+  width: 0; 
+  height: 0; 
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent; 
+  
+  border-right:10px solid rgb(4, 4, 71); 
 }
-
-#startButton:active,
-.taskIcon:active {
-    transform: scale(0.9);
-}
-
-#startMenu {
-    display: none;
-    position: fixed;
-    bottom: 58px;
-    left: 10px;
-    background: white;
-    padding: 10px;
+.music{
+    background: rgba(1, 17, 73, 0.12);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    user-select: none;
+    position: absolute; 
+    top: 30%; 
+    left: 70%; 
+    transform: translate(-50%, -50%); 
+    border: solid; 
+    width: 450px;
+    height: 550px; 
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1001;
-}
+    border: #020d34;
+    box-shadow: 0 10px 30px rgba(75, 123, 255, 0.4);
 
-#startMenu button {
-    display: block;
-    margin: 5px;
-    width: 150px;
-    padding: 8px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
 }
+.musicbutton{
 
-#musicPlayer {
+    width: 100px ;
+    height:70px;
     position: fixed;
-    top: 15px;
-    right: 15px;
-    width: 200px;
-    background: rgba(25, 25, 25, 0.75);
-    backdrop-filter: blur(15px);
-    border: 1px solid #00ffff;
-    border-radius: 12px;
-    padding: 12px;
-    color: white;
-    font-family: Arial;
-    text-align: center;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.33);
-    z-index: 9999;
+    background: rgba(0, 251, 255, 0.4);
+    color: aqua;
+    top:85%;
+    left: 68%;
 }
-
-.songCover {
-    width: 100%;
-    border-radius: 8px;
-    margin-bottom: 10px;
+.clack{
+    position: absolute;
+    top: 75% ; 
+    left: 50% ;
+    color: #c7ccdc;
+    font-size: 60px;
 }
-
-#songName {
-    margin-bottom: 10px;
-    font-size: 15px;
+.folder-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 15px;
 }
-
-.controls button {
-    width: 45px;
-    height: 35px;
-    border: none;
-    border-radius: 8px;
-    background: #00bcd4;
-    color: white;
-    cursor: pointer;
-    margin: 2px;
-    transition: 0.2s;
-}
-
-.controls button:hover {
-    background: #00e5ff;
-}
-
-.controls button:active {
-    transform: scale(0.9);
-}
-
-#bootScreen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #0a0101;
-    color: #ff0033;
-    font-family: 'Courier New', Courier, monospace;
-    z-index: 10000;
-    display: flex;
-    justify-content: center;
+.music img {
+    margin-top: 30px;
+    margin-left:  60px;
     align-items: center;
-    box-sizing: border-box;
-    padding: 20px;
+    top : 50% ;
+    left: 40%;
+    width: 320px;
+    height: 320px;
+    object-fit: cover;
 }
-
-#bootContent {
-    max-width: 600px;
-    width: 100%;
-    text-align: left;
+.songleft
+{
+    top :440px;
+    left: 3%;
+    position: absolute;
+    align-items: center;
+    height:10px;
+    width: 400px;
+    background:rgb(1, 22, 62);
+    border: #020d34;
+    border: solid;
 }
-
-.glitchText {
-    font-size: 4rem;
-    font-weight: bold;
-    color: #ff3355;
-    letter-spacing: 2px;
-    margin: 0;
-    position: relative;
-    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(150, 0, 20, 0.75), 0.025em 0.05em 0 rgba(255, 50, 50, 0.75);
-    animation: glitch 500s infinite;
-}
-
-.bootSubtitle {
-    color: #80001a;
-    margin-top: 5px;
-    margin-bottom: 30px;
-    font-size: 0.9rem;
-    border-bottom: 1px dashed #550011;
-    padding-bottom: 10px;
-}
-
-#terminalLog p {
-    margin: 8px 0;
-    font-size: 1rem;
-    line-height: 1.4;
-    color: #ff1a40;
-    text-shadow: 0 0 4px rgba(255, 0, 50, 0.3);
-}
-
-.status-corrupted {
-    color: #ff0033;
-    font-weight: bold;
-    text-shadow: 0 0 8px #ff0033;
-}
-
-.status-partial {
-    color: #ff4d6d;
-    font-weight: bold;
-    text-shadow: 0 0 8px #ff4d6d;
-}
-
-.status-warning {
-    color: #ff758f;
-    font-weight: bold;
-    text-shadow: 0 0 8px #ff758f;
-}
-
-.status-error {
-    color: #ff0000;
-    font-weight: bold;
-    text-shadow: 0 0 12px #ff0000;
-    text-decoration: underline;
-}
-
-@keyframes glitch {
-    0% { text-shadow: 2px -2px 0 #ff0033, -2px 2px 0 #990011; }
-    2% { text-shadow: -3px 3px 0 #ff0033, 3px -3px 0 #990011; }
-    4% { text-shadow: 2px 2px 0 #ff0033, -2px -2px 0 #990011; }
-    100% { text-shadow: 2px -2px 0 #ff0033, -2px 2px 0 #990011; }
-}
-
-/* Glitch Cursor Trail styling */
-.custom-cursor-active, .custom-cursor-active * {
-    cursor: none !important; /* Hide default pointer */
-}
-
-.cursor-trail-node {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 24px;
-    height: 24px;
-    pointer-events: none; /* Make sure elements don't block clicks */
-    z-index: 100000;
-    transform: translate(-50%, -50%);
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M4.5 2l15 11-6.5.7 4.5 6.8-3 2-4.5-6.8-5.5 4.3z" fill="%2300ffff" stroke="%23ff0033" stroke-width="1.5"/></svg>');
-    background-size: contain;
-    background-repeat: no-repeat;
-    mix-blend-mode: screen;
-    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
-    transition: transform 0.05s linear;
-}
-.window{
-    position:absolute;
-    width:700px;
-    height:450px;
-
-    background:rgba(255,255,255,0.12);
-
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-
-    border:1px solid rgba(255,255,255,0.25);
-
-    border-radius:18px;
-
-    overflow:hidden;
-    display:none;
-
-    box-shadow:
-        0 10px 40px rgba(0,0,0,.45),
-        inset 0 1px rgba(255,255,255,.25);
-}
-.windowHeader{
-    background:rgba(20,25,35,.45);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-
-    color:white;
-
-    border-bottom:1px solid rgba(255,255,255,.15);
+.songleftin
+{
+    left: 0%;
+    position: absolute;
+    align-items: center;
+    height:100%;
+    width: 0%;
+    background:rgb(224, 227, 232);
+    
+    
 }
