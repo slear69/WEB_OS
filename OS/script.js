@@ -113,38 +113,61 @@ notes()
 
 
   
-function file(file,theold,thenew,back){
+function file(file, theold, thenew, back, theoldest, oldback, type) {
   document.addEventListener("DOMContentLoaded", function() {
     const target = document.getElementById(file);
+    const element = document.getElementById(theold);
+    const elementin = document.getElementById(thenew);
+    const backBtn = document.getElementById(back);
+    target.addEventListener("mouseover", function() {
+      target.style.backgroundColor = "#091f6f";
+    });
+    target.addEventListener("mouseout", function() {
+      target.style.backgroundColor = "#ffffff1f";
+    });
 
-    target.addEventListener("click", function() {
-      element=document.getElementById(theold)
-      elementin=document.getElementById(thenew)
-      element.style.display = "none";
-      elementin.style.display="flex";
-    
-      const backBtn = document.getElementById(back);
+  
+    if (type !== 1) {
+      target.addEventListener("click", function() {
+        element.style.display = "none";
+        elementin.style.display = "flex";
+      });
+
       backBtn.addEventListener("click", function() {
-      element.style.display = "flex";
-      elementin.style.display="none";
+        element.style.display = "flex";
+        elementin.style.display = "none";
+      });
+    } 
+  
+    else {
+      const elemen = document.getElementById(theoldest);
+      const backBtne = document.getElementById(oldback);
+
+      target.addEventListener("click", function() {
+        if (elemen) elemen.style.display = "none";
+        element.style.display = "none";
+        elementin.style.display = "flex";
+      });
+
+      backBtn.addEventListener("click", function() {
+        element.style.display = "flex";
+        elementin.style.display = "none";
+      });
+
+    
+      backBtne.addEventListener("click", function() {
+        if (elemen) elemen.style.display = "flex";
+          element.style.display = "none";
+          elementin.style.display = "none";
       });
     }
-  );
-  function hivore(){
-    target.addEventListener("mouseover",function(){
-      console.log("negga");
-      target.style.backgroundColor = "#091f6f";});
-    target.addEventListener("mouseout",function(){
-      console.log("negga");
-      target.style.backgroundColor =  "#ffffff1f";});
-  }
-  hivore()
-});
+  });
 }
-file("file2o","content","intxt","bac1")
-file("file1o","content","infolder","back")
 
-
+// Function calls
+file("file2o", "content", "intxt", "bac1");
+file("file1o", "content", "infolder", "back");
+file("file3o", "infolder", "intxt2", "back2", "content", "back", 1);
 var ontop= 0;
 function Top(top){
   top.addEventListener("mousedown" , () =>{
