@@ -1,406 +1,207 @@
-const files = [
-    {
-        name: "Readme.txt",
-        content: "https://www.bilibili.tv/en/video/4790502645433344\ndont put this in the browser if you are a chud"
-    },
-    { name: "Notes.txt", content: "Buy milk\nLearn JS" },
-    { name: "Secret.txt", content: "👀 hidden file" }
-];
+const toolbars = document.getElementById("bar");
+const musice = document.getElementById("music");
+function updateToolbar() {
+  if (!toolbars) return;
+  toolbars.innerHTML = "";
+  const windows = [
+    { id: "windollswell", icon: "image/about.png" },
+    { id: "windollsnote", icon: "image/note.png" },
+    { id: "windollfiles", icon: "image/folder.png" },
+    { id: "windollbrow", icon: "image/brow.png" }
+  ];
+  // Loop through all windows
+  for (let i = 0; i < windows.length; i++) {
+    const el = document.getElementById(windows[i].id);
 
-
-
-
-
-
-
-const playlist = [
-    {
-        title: "Who's Ready for Tomorrow",
-        audioSrc: "music/Who's Ready for Tomorrow.mp3",
-        coverSrc: "images/Cyberpunk 2077_ Radio, Vol (1). 2 (Original Soundtrack).jpg"
-    },
-    {
-        title: "I Really Want to Stay at Your House",
-        audioSrc: "music/I Really Want to Stay at Your House.mp3",
-        coverSrc: "images/Cyberpunk_ Edgerunners (Original Series Soundtrack).jpg"
+    if (window.getComputedStyle(el).display != "none") {
+      toolbars.innerHTML += `<div class="folder-wrapper"><img src="${windows[i].icon}" id="welcomeopen" alt="icon"></div>`;
     }
-];
-
-
-
-
-
-
-
-
-const bootLines = [
-    { text: "CRITICAL: Initializing forced deck override...", delayAfter: 300 },
-    { text: " [OVERRIDDEN]", type: "status-partial", delayAfter: 200 },
-    { text: "\nBreaching Network Perimeter ICE...", delayAfter: 400 },
-    { text: " [BREACHED]", type: "status-corrupted", delayAfter: 500 },
-    { text: "\nInjecting local daemon exploit...", delayAfter: 300 },
-    { text: "\nRED ALERT: Synaptic back-burn protocol active.", type: "status-warning", delayAfter: 400 },
-    { text: "\nPurging system tracker nodes...", delayAfter: 250 },
-    { text: " [PURGED]", type: "status-partial", delayAfter: 300 },
-    { text: "\nForcing memory core allocation...", delayAfter: 500 },
-    { text: "\nTERMINAL ERROR: Sector 0x9-RED corrupt. Hostile trace imminent.", type: "status-error", delayAfter: 600 },
-    { text: "\nDeploying digital counter-measures...", delayAfter: 300 },
-    { text: " [DEPLOYED]", type: "status-warning", delayAfter: 400 },
-    { text: "\nBypasses complete. Welcome to the underground...", delayAfter: 1000 }
-];
-
-function initApp() {
-    const startMenu = document.getElementById("startMenu");
-    const clock = document.getElementById("clock");
-    const notesArea = document.getElementById("notesArea");
-    const urlInput = document.getElementById("url");
-    const browserFrame = document.getElementById("browserFrame");
-    const fileList = document.getElementById("fileList");
-    const songNameEl = document.getElementById("songName");
-    const songCoverEl = document.getElementById("songCover");
-    const playButton = document.getElementById("playButton");
-    const pauseButton = document.getElementById("pauseButton");
-    const skipButton = document.getElementById("skipButton");
-    const terminalLog = document.getElementById("terminalLog");
-
-    let currentSongIndex = 0;
-    let song = new Audio(playlist[currentSongIndex].audioSrc);
-    let lineIndex = 0;
-
-    function openWindow(id) {
-        const windowEl = document.getElementById(id);
-        if (windowEl) {
-            windowEl.style.display = "block";
-        }
-        closeStartMenu();
-    }
-
-    function closeWindow(id) {
-        const windowEl = document.getElementById(id);
-        if (windowEl) {
-            windowEl.style.display = "none";
-        }
-    }
-
-    function toggleStartMenu() {
-        if (!startMenu) return;
-        startMenu.style.display = startMenu.style.display === "block" ? "none" : "block";
-    }
-
-    function closeStartMenu() {
-        if (startMenu) {
-            startMenu.style.display = "none";
-        }
-    }
-
-    function updateClock() {
-        if (!clock) return;
-        clock.textContent = new Date().toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit"
-        });
-    }
-
-    function setupBrowser() {
-        const openWebsiteButton = document.getElementById("openWebsiteButton");
-
-        if (openWebsiteButton) {
-            openWebsiteButton.addEventListener("click", () => {
-                let url = urlInput?.value?.trim() || "";
-                if (!url.startsWith("http")) {
-                    url = "https://" + url;
-                }
-                if (browserFrame) {
-                    browserFrame.src = url;
-                }
-            });
-        }
-    }
-
-    function setupNotes() {
-        if (!notesArea) return;
-        notesArea.value = localStorage.getItem("notes") || "";
-        notesArea.addEventListener("input", () => {
-            localStorage.setItem("notes", notesArea.value);
-        });
-    }
-
-    function renderFiles() {
-        if (!fileList) return;
-        fileList.innerHTML = "";
-
-        files.forEach((file, index) => {
-            const item = document.createElement("div");
-            item.className = "fileItem";
-            item.textContent = `📄 ${file.name}`;
-            item.addEventListener("click", () => openFile(index));
-            fileList.appendChild(item);
-        });
-    }
-
-    function openFile(index) {
-        const file = files[index];
-        if (!file) return;
-
-        const win = document.createElement("div");
-        win.className = "window";
-        win.style.display = "block";
-        win.style.top = "100px";
-        win.style.left = "200px";
-
-        win.innerHTML = `
-            <div class="windowHeader">
-                <span>${file.name}</span>
-                <div class="windowButtons">
-                    <button type="button" data-close-window="file">✕</button>
-                </div>
-            </div>
-            <div class="windowContent">
-                <pre>${file.content}</pre>
-            </div>
-        `;
-
-        document.body.appendChild(win);
-        enableDrag(win);
-
-        const closeButton = win.querySelector(".windowButtons button");
-        if (closeButton) {
-            closeButton.addEventListener("click", () => win.remove());
-        }
-    }
-
-    function enableDrag(element) {
-        const handle = element.querySelector(".windowHeader") || element;
-        let x = 0;
-        let y = 0;
-        let dx = 0;
-        let dy = 0;
-
-        handle.addEventListener("mousedown", (event) => {
-            if (event.target.closest("button")) return;
-
-            event.preventDefault();
-            x = event.clientX;
-            y = event.clientY;
-
-            document.addEventListener("mousemove", drag);
-            document.addEventListener("mouseup", stopDrag);
-        });
-
-        function drag(event) {
-            event.preventDefault();
-            dx = x - event.clientX;
-            dy = y - event.clientY;
-            x = event.clientX;
-            y = event.clientY;
-
-            element.style.left = `${element.offsetLeft - dx}px`;
-            element.style.top = `${element.offsetTop - dy}px`;
-        }
-
-        function stopDrag() {
-            document.removeEventListener("mousemove", drag);
-            document.removeEventListener("mouseup", stopDrag);
-        }
-    }
-
-    function updatePlayerUI() {
-        const currentSong = playlist[currentSongIndex];
-        if (songNameEl) {
-            songNameEl.textContent = currentSong.title;
-        }
-        if (songCoverEl) {
-            songCoverEl.src = currentSong.coverSrc;
-        }
-    }
-
-
-
-
-
-    function playSong() {
-        song.play().catch(() => {});
-    }
-
-    function pauseSong() {
-        song.pause();
-    }
-
-    function skipSong() {
-        song.pause();
-        currentSongIndex = (currentSongIndex + 1) % playlist.length;
-        song = new Audio(playlist[currentSongIndex].audioSrc);
-        updatePlayerUI();
-        song.play().catch(() => {});
-    }
-
-    function initMusicPlayer() {
-        updatePlayerUI();
-
-        playButton?.addEventListener("click", playSong);
-        pauseButton?.addEventListener("click", pauseSong);
-        skipButton?.addEventListener("click", skipSong);
-    }
-
-
-
-
-
-
-
-    function typeBootSequence() {
-        if (!terminalLog) return;
-
-        if (lineIndex < bootLines.length) {
-            const line = bootLines[lineIndex];
-            let charIndex = 0;
-            const element = document.createElement(line.type ? "span" : "p");
-
-            if (line.type) {
-                element.className = line.type;
-                element.style.display = "inline";
-            }
-
-            if (!line.type && lineIndex > 0) {
-                element.style.marginTop = "8px";
-            }
-
-            terminalLog.appendChild(element);
-
-            function typeChar() {
-                if (charIndex < line.text.length) {
-                    if (line.text[charIndex] === "\n") {
-                        element.innerHTML += "<br>";
-                    } else {
-                        element.innerHTML += line.text[charIndex];
-                    }
-                    charIndex += 1;
-                    setTimeout(typeChar, 20 + Math.random() * 30);
-                } else {
-                    lineIndex += 1;
-                    setTimeout(typeBootSequence, line.delayAfter);
-                }
-            }
-
-            typeChar();
-        } else {
-            setTimeout(() => {
-                const bootScreen = document.getElementById("bootScreen");
-                if (bootScreen) {
-                    bootScreen.style.transition = "opacity 0.6s cubic-bezier(0.1, 0.8, 0.3, 1)";
-                    bootScreen.style.opacity = "0";
-                    setTimeout(() => {
-                        bootScreen.style.display = "none";
-                    }, 600);
-                }
-            }, 1200);
-        }
-    }
-
-    document.addEventListener("click", (event) => {
-        const actionTarget = event.target.closest("[data-window]");
-        if (actionTarget) {
-            const windowId = actionTarget.getAttribute("data-window");
-            if (windowId) {
-                openWindow(windowId);
-            }
-            return;
-        }
-
-        const closeTarget = event.target.closest("[data-close-window]");
-        if (closeTarget) {
-            const windowId = closeTarget.getAttribute("data-close-window");
-            if (windowId) {
-                closeWindow(windowId);
-            }
-            return;
-        }
-
-        if (!event.target.closest("#startMenu") && !event.target.closest("#startButton")) {
-            closeStartMenu();
-        }
-    });
-
-    document.getElementById("startButton")?.addEventListener("click", (event) => {
-        event.stopPropagation();
-        toggleStartMenu();
-    });
-
-    enableDrag(document.getElementById("files"));
-    enableDrag(document.getElementById("browser"));
-    enableDrag(document.getElementById("notes"));
-
-    updateClock();
-    setInterval(updateClock, 1000);
-    renderFiles();
-    setupBrowser();
-    setupNotes();
-    initMusicPlayer();
-    typeBootSequence();
+  }
 }
 
-document.addEventListener("DOMContentLoaded", initApp);
+var biggestIndex = 0
+drag(document.getElementById("windollswell"));
+drag(document.getElementById("windollsnote"));
+drag(document.getElementById("windollfiles"));
+drag(document.getElementById("windollbrow"))
+var welcomeScreen = document.querySelector("#windolls")
 
-// Add this logic inside your initApp() function in script.new.js
-function setupGlitchCursor() {
-    const toggleBtn = document.getElementById("glitchCursorButton");
-    let isEffectActive = false;
-    const maxTrails = 5; 
-    const history = [];
+function time(){
+  var timeText = document.querySelector("#timeElement");
+  var currentTime = new Date().toLocaleString();
+  timeText.innerHTML = currentTime
+  
+}
+ setInterval(time, 1000);
 
-    if (!toggleBtn) return;
+function drag(element) {
+  const header = element.querySelector(".topbar");// surces by class
+  var initialX = 0;//mousepos
+  var initialY = 0;
+  var currentX = 0;
+  var currentY = 0;
 
-    toggleBtn.addEventListener("click", () => {
-        isEffectActive = !isEffectActive;
-        if (isEffectActive) {
-            document.body.classList.add("custom-cursor-active");
-            toggleBtn.style.background = "rgba(0, 255, 255, 0.3)";
-            createTrailElements();
-        } else {
-            document.body.classList.remove("custom-cursor-active");
-            toggleBtn.style.background = "transparent";
-            removeTrailElements();
-        }
-    });
+  if (header) {
+    header.onmousedown = startDragging; // if the mouse down is on the hader it will calll this function
+  }  
 
-    function createTrailElements() {
-        if (document.querySelectorAll('.cursor-trail-node').length > 0) return;
-        
-        for (let i = 0; i < maxTrails; i++) {
-            const el = document.createElement("div");
-            el.className = "cursor-trail-node";
-            // Stagger visual glitch characteristics per element copy
-            el.style.opacity = (1 - (i / maxTrails)).toString();
-            el.style.filter = `drop-shadow(2px 2px 4px rgba(0,0,0,0.5)) hue-rotate(${i * 45}deg)`;
-            document.body.appendChild(el);
-            history.push({ x: 0, y: 0, element: el });
-        }
-    }
+  function startDragging(e) {
+    e = e || window.event;
+    e.preventDefault();
+    initialX = e.clientX;
+    initialY = e.clientY;
+    document.onmouseup = stopDragging;
+    document.onmousemove = dragElement;
+  }
 
-    function removeTrailElements() {
-        const nodes = document.querySelectorAll('.cursor-trail-node');
-        nodes.forEach(node => node.remove());
-        history.length = 0;
-    }
+  function dragElement(e) {
+    e = e || window.event;
+    e.preventDefault();
+    currentX = initialX - e.clientX;
+    currentY = initialY - e.clientY;
+    initialX = e.clientX;
+    initialY = e.clientY;
+    element.style.top = (element.offsetTop - currentY) + "px";
+    element.style.left = (element.offsetLeft - currentX) + "px";
+  }
 
-    document.addEventListener("mousemove", (e) => {
-        if (!isEffectActive || history.length === 0) return;
-
-        // Push current coordinates to track historical pointer path
-        const targetX = e.clientX;
-        const targetY = e.clientY;
-
-        // Animate trailing nodes following behind sequentially
-        history.forEach((node, index) => {
-            setTimeout(() => {
-                if(node.element) {
-                    node.element.style.left = `${targetX}px`;
-                    node.element.style.top = `${targetY}px`;
-                }
-            }, index * 25); // Staggers the trailing gap timing
-        });
-    });
+  function stopDragging() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
 }
 
-// Call setupGlitchCursor() near the bottom of initApp()
-setupGlitchCursor();
+
+function openenclose(element,open,close) {
+  var welcomeScreen = document.getElementById(element)
+  var wClose = document.getElementById(close)
+  var wOpen = document.getElementById(open)
+
+ 
+  function closeWindow(element) {
+    element.style.display = "none"
+    updateToolbar()
+    
+  }
+  function openWindow(element) {
+    element.style.display = "block"
+    biggestIndex++;  // Increment biggestIndex by 1
+    element.style.zIndex = biggestIndex;
+    updateToolbar()
+  }
+  wClose.addEventListener("click", function() {closeWindow(welcomeScreen);});//this places listener to this specific HTML element to licent for clicking and if it dose it call the function
+  wOpen.addEventListener("click", function() {openWindow(welcomeScreen);});
+  
+
+}
+
+
+
+function notes(){
+  const note = document.getElementById("notestype")
+  if (!note) return;
+  note.value = localStorage.getItem("notesclose") || "";
+  note.addEventListener("input", () => {localStorage.setItem("notesclose",note.value)});
+}
+
+//the 1st is the id of windoll - section that i will be working on the 2nd is the id of the element that will open it and the same with 3rd the close button
+openenclose("windollswell","welcomeopen","wellclose")
+openenclose("windollsnote","noteopen","notesclose")
+openenclose("windollfiles","filesopen","fileclose")
+openenclose("windollbrow","browopen","browclose")
+notes()
+
+
+  
+function file(file,theold,thenew,back){
+  document.addEventListener("DOMContentLoaded", function() {
+    const target = document.getElementById(file);
+
+    target.addEventListener("click", function() {
+      element=document.getElementById(theold)
+      elementin=document.getElementById(thenew)
+      element.style.display = "none";
+      elementin.style.display="flex";
+    
+      const backBtn = document.getElementById(back);
+      backBtn.addEventListener("click", function() {
+      element.style.display = "flex";
+      elementin.style.display="none";
+      });
+    }
+  );
+  function hivore(){
+    target.addEventListener("mouseover",function(){
+      console.log("negga");
+      target.style.backgroundColor = "#091f6f";});
+    target.addEventListener("mouseout",function(){
+      console.log("negga");
+      target.style.backgroundColor =  "#ffffff1f";});
+  }
+  hivore()
+});
+}
+file("file2o","content","intxt","bac1")
+file("file1o","content","infolder","back")
+
+
+var ontop= 0;
+function Top(top){
+  top.addEventListener("mousedown" , () =>{
+    ontop ++;
+    top.style.zIndex=ontop;
+  })
+}
+Top(document.getElementById("windollswell"))
+Top (document.getElementById("windollsnote"))
+Top (document.getElementById("windollfiles"))
+
+
+
+
+var current = 1 ;
+var tomorow = new Audio()
+var tomorow = new Audio()
+function musicplayer(){
+  var issac = new Audio()
+  const thebar = document.getElementById("in")
+  const playbutt = document.getElementById("play")
+  const paus = document.getElementById("pause")
+  const skip = document.getElementById("skip")
+  const songs = ['MUSIC/specialist.mp3','MUSIC/Odo.mp3','MUSIC/flower.mp3','MUSIC/TOMOROW.mp3','MUSIC/acttomorow.mp3']
+  
+  const imgDiv = document.createElement("div");
+
+  function check()
+  {
+    if(current > 5){current = 1}
+    if(current == 1){issac = new Audio(songs[0]);timebar();imgDiv.innerHTML = `<img src="image/issac.jpg">`;musice.appendChild(imgDiv);}
+    if(current == 2){issac = new Audio(songs[1]);timebar();imgDiv.innerHTML = `<img src="image/odo.jpg">`;musice.appendChild(imgDiv);}
+    if(current == 3){issac = new Audio(songs[2]);timebar();imgDiv.innerHTML = `<img src="image/flowerman.jpg">`;musice.appendChild(imgDiv);}
+    if(current == 4){issac = new Audio(songs[3]);timebar();imgDiv.innerHTML = `<img src="image/cp2077.jpg">`;musice.appendChild(imgDiv);}
+    if(current == 5){issac = new Audio(songs[4]);timebar();imgDiv.innerHTML = `<img src="image/cyberpunk.jpg">`;musice.appendChild(imgDiv);}
+  }
+  check()
+  playbutt.addEventListener("click",function(){issac.play()})
+  paus.addEventListener("click",function(){issac.pause()})
+  skip.addEventListener("click",function(){ issac.pause(); current++ ;check();issac.play()})
+  function timebar()
+  {
+    issac.addEventListener('timeupdate', function() {
+      thebar.style.width =  "0%"
+      const timer = issac.currentTime;
+      const duration = issac.duration;
+      var presents = -(Math.round( ((duration - timer)/duration)*100)) + 100 
+      console.log(`Current position: ${presents} % seconds`);
+      thebar.style.width = presents + "%"
+    })
+  }
+}
+musicplayer()
+
+var note = document.getElementById("windollsnote")
+var well = document.getElementById("windollswell")
+var files = document.getElementById("windollfiles")
+var brow = document.getElementById("windollbrow")
+
+
