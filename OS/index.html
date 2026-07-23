@@ -1,114 +1,132 @@
-<!DOCTYPE html>
-<html lang="en">
+<! DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyOS</title>
+    <title>No Ai use i promis</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
 </head>
-<body>
-    <div id="bootScreen">
-        <div id="bootContent">
-            <h1 class="glitchText" data-text="FutureOS">FutureOS</h1>
-            <p class="bootSubtitle">WE ALL LOVE CYBERPUNK</p>
-            <div id="terminalLog"></div>
+<body class="font">
+    <section class="background">
+        <div class="worckbar"id="bar">
+            
         </div>
-    </div>
-
-    <div id="desktop">
-        <div class="icon" data-window="files">
-            <img src="images/small_folder.png" class="desktopIcon" alt="Files icon">
-            <span>Files</span>
+        <div class="icon">
+            <img src="image/about.png" id="welcomeopen"> 
+            <p style="cursor: pointer" >about</p> <!-- the id gose in the js code if clicked -->
         </div>
-
-        <div class="icon" data-window="browser">
-            <img src="images/broswer.png" class="desktopIcon" alt="Browser icon">
-            <span>Browser</span>
+        <div class="icon">
+            <img src="image/note.png" id="noteopen"> 
+            <p style="cursor: pointer" >notes</p> <!-- the id gose in the js code if clicked-->
         </div>
-
-        <div class="icon" data-window="notes">
-            <img src="images/note.png" class="desktopIcon" alt="Notes icon">
-            <span>Notes</span>
+        <div class="icon">
+            <img src="image/folder.png" id="filesopen"> 
+            <p style="cursor: pointer" >files</p> <!-- the id gose in the js code if clicked -->
         </div>
-    </div>
+        <div class="icon">
+            <img src="image/brow.png" id="browopen"> 
+            <p style="cursor: pointer" >internet</p> <!-- the id gose in the js code if clicked-->
+        </div>
+        <p class = "clack"id="timeElement" ></p>
+    </section>
 
-    <div class="window" id="files" style="top:120px; left:180px;">
-        <div class="windowHeader">
-            <span>📁 File Explorer</span>
-            <div class="windowButtons">
-                <button type="button" data-close-window="files">✕</button>
+
+    <!--this is the about app -->
+    <section id="windollswell" class="windoll">
+        <div  class="welcome">
+            <div class="topbar">
+                <div class="closebutton" id="wellclose"></div> <!-- the id gose in the js code-->
+                <p style="margin-left: 16px;">Aboout</p>
+            </div>
+            <div>
+                <h1>Welcome to my OS</h1>
+                <h2>Introduction:</h2>
+                <p>this an os inspired by the cyberpunk edge runner  </p>
+                <p> i tryed my best. </p>
+                <p> and minimal use of ai </p>
+
             </div>
         </div>
-        <div class="windowContent">
-            <div id="fileList"></div>
+    </section>
+    
+    <!--this is the notes app-->
+    <section class = "windoll" id="windollsnote">
+        <div class="topbar" >
+            <div class = "closebutton"id="notesclose"></div>
         </div>
-    </div>
-    <div class="window" id="browser" style="top:90px; left:220px;">
-        <div class="windowHeader">
-            <span>🌐 Browser</span>
-            <div class="windowButtons">
-                <button type="button" data-close-window="browser">✕</button>
+        <div  class="notes">
+            <textarea id="notestype" aria-label="Notes editor"></textarea> 
+        </div>
+    </section>
+
+
+
+    <section class = "windoll" id="windollfiles">
+        <div class = "topbar">
+            <div class = "closebutton"id="fileclose"></div>
+        </div>
+        
+        <div id = "content">
+            <div class="files" id="file1o">
+                <h2 style="padding-left:10px ">    some.folder  </h2>
+            </div>
+            <div class="files" id="file2o"style="top: 15% ; left: 50%; ">
+                <h2 style="padding-left:10px; ">   some.txt   <h2>
             </div>
         </div>
-        <div class="windowContent browserContent">
-            <div class="browserToolbar">
-                <input id="url" type="text" placeholder="https://www.bilibili.tv/en/video/4790502645433344">
-                <button id="openWebsiteButton" type="button">Go</button>
+
+        <div id = "infolder" style="display:none ;">
+            <div class="back" id="back"></div>
+                <div class="files" id="file3o">
+                    <h2 style="padding-left:10px">some.txt</h2>
+                </div>
             </div>
-            <iframe id="browserFrame" title="Web browser"></iframe>
+        <div id="intxt" class = "intxt" style="display:none;">
+            <div class ="back" id = "bac1"> </div>
+            <h1>i hope you like the music</h1>
+            <h2>honestly the music is just five somgs that i liked so hope you enjoy</h2>
+            <p>also ty for the fast responed</p>
         </div>
-    </div>
-
-    <div class="window" id="notes" style="top:110px; left:240px;">
-        <div class="windowHeader">
-            <span>📝 Notes</span>
-            <div class="windowButtons">
-                <button type="button" data-close-window="notes">✕</button>
-            </div>
+        <div id="intxt2" class ="intxt" style=" display: none;">
+            <div class ="back" id = "back2"> </div>
+            <h1>yhaaa so i had to rewrite the code for the in file opening if you want go check it out</h1>
         </div>
-        <div class="windowContent notesContent">
-            <textarea id="notesArea" aria-label="Notes editor"></textarea>
+    </section>
+
+
+
+    <section class="windoll" id="windollbrow">
+        <div class="topbar" id = topbar>
+            <div class = "closebutton"id="browclose"></div>
         </div>
-    </div>
-
-    <div id="startMenu" aria-label="Start menu">
-        <button type="button" data-window="files">Files</button>
-        <button type="button" data-window="browser">Browser</button>
-        <button type="button" data-window="notes">Notes</button>
-    </div>
-
-    <div id="taskbar">
-        <div id="taskbar-left">
-            <button id="startButton" type="button" aria-label="Open start menu">⊞</button>
-            <button class="taskIcon" type="button" data-window="files">
-                <img src="images/mini_folder.png" class="desktopIcon" alt="File explorer shortcut">
-            </button>
-            <button class="taskIcon" type="button" data-window="browser">
-                <img src="images/mini_browser.png" class="desktopIcon" alt="Browser shortcut">
-            </button>
-            <button class="taskIcon" type="button" data-window="notes">
-                <img src="images/mini_notes.png" class="desktopIcon" alt="Notes shortcut">
-            </button>
-            <button id="glitchCursorButton" class="taskIcon" type="button" title="Toggle Glitch Cursor">
-                ✨
-            </button>
+        <div id="theinternet">
+            <iframe id="theinternet" src="https://wikipedia.org" id="theinternet" frameborder="0" style="height: 100% ; width:100% ;"></iframe>
         </div>
+    </section>
 
-        <div id="taskbar-right">
-            <span id="clock" aria-live="polite"></span>
+
+    <section class = "music" id="music">
+         <div class="topbar" >
+            <div class = "closebutton"id="notesclose"></div>
         </div>
-    </div>
-
-    <div id="musicPlayer">
-        <div id="songName">Song 1</div>
-        <img id="songCover" src="images/Cyberpunk 2077_ Radio, Vol (1). 2 (Original Soundtrack).jpg" alt="Song cover" class="songCover">
-        <div class="controls">
-            <button id="playButton" type="button">▶</button>
-            <button id="pauseButton" type="button">⏸</button>
-            <button id="skipButton" type="button">⏭</button>
+        <div class = "songleft"><div class = "songleftin" id = "in" ></div></div>
+        <div class = "musicbutton" id = "pause">
+            <p style="padding-left: 25px ; padding-top: 25px ; ">pause</p>
         </div>
-    </div>
+        <div class="musicbutton" style="left: 3%;" id = "play">
+            <p style="padding-left: 30px ; padding-top: 25px ; ">play</p>
+        </div>
+        <div class="musicbutton" style="left:36%;" id = "skip">
+            <p style="padding-left: 30px ; padding-top: 25px ; ">skip</p>
+        </div>
+    </section>
+    
+    
 
-    <script src="script.new.js"></script>
+
+
+
+    <script src="scripts.js"></script>
 </body>
 </html>
