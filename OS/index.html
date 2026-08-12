@@ -5,31 +5,93 @@
     <title>No Ai use i promis</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" type="text/css" href="style.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="font">
-    <section class="background">
+
+
+    <div id="loading" class="loading">
+        <div class="hud-circle">
+            <div class="ring-outer"></div>
+            <div class="ring-inner"></div>
+            <div class="hud-center">
+                <span id="progtext">0%</span>
+                <small>SYNCING</small>
+            </div>
+        </div>
+    </div>  
+
+
+    
+    <section style="z-index: 10;">
         <div class="worckbar"id="bar">
-            
+            <div id="active-apps"></div>
+            <img src="image/set.png" id = "set" style="top: 85%; position: absolute;z-index: 1;">
+            <img src="image/music.png" id = "opmusic" style=" top : 80%; position: absolute;z-index: 1;">
+            <img src="image/setRED.png" id = "setred" style="top: 85%; position: absolute;z-index: 1; display: none;">
+            <img src="image/musicRED.png" id = "opmusicred" style=" top : 80%; position: absolute;z-index: 1; display: none;">
         </div>
-        <div class="icon">
+        <div class="icon"id = "icons">
             <img src="image/about.png" id="welcomeopen"> 
-            <p style="cursor: pointer" >about</p> <!-- the id gose in the js code if clicked -->
+            <p style="cursor: pointer" id ="iconsf" >about</p> <!-- the id gose in the js code if clicked -->
         </div>
-        <div class="icon">
+        <div class="icon"id = "icons2">
             <img src="image/note.png" id="noteopen"> 
-            <p style="cursor: pointer" >notes</p> <!-- the id gose in the js code if clicked-->
+            <p style="cursor: pointer" id ="icons2f" >notes</p> <!-- the id gose in the js code if clicked-->
         </div>
-        <div class="icon">
+        <div class="icon" id ="icons3">
             <img src="image/folder.png" id="filesopen"> 
-            <p style="cursor: pointer" >files</p> <!-- the id gose in the js code if clicked -->
+            <p style="cursor: pointer" id ="icons3f">files</p> <!-- the id gose in the js code if clicked -->
         </div>
-        <div class="icon">
+        <div class="icon" id ="icons4">
             <img src="image/brow.png" id="browopen"> 
-            <p style="cursor: pointer" >internet</p> <!-- the id gose in the js code if clicked-->
+            <p style="cursor: pointer ; " id ="icons4f">internet</p> <!-- the id gose in the js code if clicked-->
         </div>
-        <p class = "clack"id="timeElement" ></p>
+        <div class="icon" id ="icons5">
+            <img src="image/calc.png" id="calcopen"> 
+            <p style="cursor: pointer ; padding-left: 16px; " id ="icons5f">calculator</p> <!-- the id gose in the js code if clicked-->
+        </div>
+
+
+
+        <div class="icon"  id ="iconsr" style="display: none;">
+            <img src="image/aboutRED.png" id="welcomeopenR"> 
+            <p style="cursor: pointer" id ="iconsrf" >about</p> <!-- the id gose in the js code if clicked -->
+        </div>
+        <div class="icon"  id ="icons2r"  style="display: none;">
+            <img src="image/noteRED.png" id="noteopenR"> 
+            <p style="cursor: pointer" id ="icons2rf" >notes</p> <!-- the id gose in the js code if clicked-->
+        </div>
+        <div class="icon"  id ="icons3r" style="display: none;">
+            <img src="image/folderRED.png" id="filesopenR"> 
+            <p style="cursor: pointer" id ="icons3rf">files</p> <!-- the id gose in the js code if clicked -->
+        </div>
+        <div class="icon"  id ="icons4r" style="display: none;">
+            <img src="image/browRED.png" id="browopenR"> 
+            <p style="cursor: pointer ; " id ="icons4rf">internet</p> <!-- the id gose in the js code if clicked-->
+        </div>
+        <div class="icon"  id ="icons5r" style="display: none;">
+            <img src="image/CALCred.png" id="callR"> 
+            <p style="cursor: pointer ; padding-left: 16px; " id ="icons5rf">calculator</p> <!-- the id gose in the js code if clicked-->
+        </div>
+        <p class = "clack" id="timeElement" ></p>
     </section>
+
+
+
+    <div id = "videoss" class = "videoo" style="display:none">
+        <video autoplay muted loop src="WALL/video1.mp4" ></video>
+    </div>
+    <div id="videeeooo"class = "videoo" style="display:none">
+        <video autoplay muted loop src="WALL/video2.mp4" ></video>
+    </div>
+    <div class = "videoo" id="gog" style="display:none">
+        <img src="image/wallpeapr.png"> 
+    </div>
+    <div class = "videoo" id="gog2" >
+        <img src="image/images (1).jpg"> 
+    </div>
+    
 
 
     <!--this is the about app -->
@@ -38,6 +100,7 @@
             <div class="topbar">
                 <div class="closebutton" id="wellclose"></div> <!-- the id gose in the js code-->
                 <p style="margin-left: 16px;">Aboout</p>
+                <div class = "rclosebutton" id="rwellclose"></div>
             </div>
             <div>
                 <h1>Welcome to my OS</h1>
@@ -54,6 +117,7 @@
     <section class = "windoll" id="windollsnote">
         <div class="topbar" >
             <div class = "closebutton"id="notesclose"></div>
+            <div class = "rclosebutton"id="rnotesclose"></div>
         </div>
         <div  class="notes">
             <textarea id="notestype" aria-label="Notes editor"></textarea> 
@@ -65,6 +129,7 @@
     <section class = "windoll" id="windollfiles">
         <div class = "topbar">
             <div class = "closebutton"id="fileclose"></div>
+            <div class = "rclosebutton" id="rfileclose"></div>
         </div>
         
         <div id = "content">
@@ -99,16 +164,18 @@
     <section class="windoll" id="windollbrow">
         <div class="topbar" id = topbar>
             <div class = "closebutton"id="browclose"></div>
+            <div class = "rclosebutton" id="rbrowclose"></div>
         </div>
         <div id="theinternet">
-            <iframe id="theinternet" src="https://wikipedia.org" id="theinternet" frameborder="0" style="height: 100% ; width:100% ;"></iframe>
+            <iframe id="theinternet" src="https://wikipedia.org" frameborder="0" style="height: 100% ; width:100% ;"></iframe>
         </div>
     </section>
 
 
     <section class = "music" id="music">
-         <div class="topbar" >
-            <div class = "closebutton"id="notesclose"></div>
+        <div class="topbar" >
+            <div class = "closebutton"id="musicclose"></div>
+            <div class = "rclosebutton"id="rmusicclose"></div>
         </div>
         <div class = "songleft"><div class = "songleftin" id = "in" ></div></div>
         <div class = "musicbutton" id = "pause">
@@ -121,11 +188,172 @@
             <p style="padding-left: 30px ; padding-top: 25px ; ">skip</p>
         </div>
     </section>
-    
-    
 
 
 
+    <section class="windoll" id = "settings" style="width: 300px ; height: 300px; display: flex; left: 86% ; top: 84%">
+        <div class = "topbar" style="z-index: 3;">
+           <div class = "closebutton" id="setGSclose"  ></div>
+           <div class = "rclosebutton" id="rsetGSclose"  ></div>
+        </div>
+        <div id = "chose" style="height: 100 px; width:50px ; padding-top: 30px;">
+            <img src="image/set.png" id = "1stset" style="height: 60px ;width: 60px;">
+            <p style="left:100px; top:20px; position: absolute ;width:180px; line-height:1.1; z-index: -2;">
+                <strong>Clock:</strong><br>
+                Here we change the clock settings
+            </p>
+            <img src="image/setwall.png" id = "2stset" style="height: 60px ;width: 60px; left:50%">
+            <p style="left:100px; top:80px; position: absolute ;width:180px; line-height:1.1; z-index: -2;">
+                <strong>wallpeapr:</strong><br>
+                Here we change the wallpeapr - video or a img
+            </p>
+            <img src="image/clock.png" id = "3stset" style="height: 60px ;width: 60px; left:75%">
+            <p style="left:100px; top:155px; position: absolute ;width:180px; line-height:1.1; z-index: -2;">
+                <strong>Theams:</strong><br>
+                you can change the icons and the font
+            </p>
+            <img src="image/CAll.png" id = "4stset" style="height: 60px ;width: 60px; left:75%">
+            <p style="left:100px; top:215px; position: absolute ;width:180px; line-height:1.1; z-index: -2;">
+                <strong>Calendar:</strong><br>
+                you can change the calendar settings 
+            </p>
+        </div>
+        
+        <!-- from here to theend of this div is the settings for the clock-->
+        <div id = "contento" style="display: none;">
+            
+            <div class="back" id = "tocontent" style="position: absolute; top: 250px; left: 10px ; z-index: 9;"></div>
+
+            <input class = "setcoler" type="color" id="coler" value="#ffffff" style="left: 20px;top: 20px; z-index: 2;">  
+            <p style="padding-left:130px; padding-top:20px; width:180px; line-height:1.4; z-index: -2;">
+                <strong>Colors:</strong><br>
+                This will change the color of the clock.
+            </p>
+            
+            <input class = "setcoler" type="number" min="0" max="4" value="4" id = "position" style="left: 20px; top: 140px; width: 50px; height: 30px; z-index: 2;"> 
+            <p style="padding-left: 75px ; padding-top: 150px ; position: absolute; z-index: 1;">
+                position 4-1 locations
+            </p>
+            
+            <input class = "setcoler" type="number" min="1" max="10" value="6" id = "scale" style="left: 20px; top: 190px; width: 50px; height: 30px; z-index: 2;  ;"> 
+            <p style="padding-left: 75px ; padding-top: 190px ; position: absolute; z-index: 1;">
+                scale: how big is it , 6 is the default size
+            </p>
+
+            <input class = "setcoler" type="checkbox" id = "visable" style="left: 30px; top: 240px; width: 30px; height: 30px; z-index: 7;" checked> 
+            <p style="padding-left: 70px ; padding-top: 240px ; position: absolute; z-index: 1;">
+                visable: if desable the clock will despear
+            </p>
+        </div>
+
+        <div id = "contentowall" style="display: none;">
+            <div class="back" id = "nowall" style="position: absolute; top: 250px; left: 10px ; z-index: 9;"></div>
+            <p style="position: absolute; top: 40px;">video:</p>
+            <img src="image/videoimg.png"id="thevideo"style="position: absolute; top: 20px; left: 65px; height: 50px; width: 100px;">
+            <img src="image/videoimg2.png"id="thevideo2"style="position: absolute; top: 20px; left: 185px; height: 50px; width: 100px;">
+            <p style="position: absolute; top:100px; z-index: -20;">imeges:</p>
+            <img src="image/wallpeapr.png"id="thewallpaper"style="position: absolute; top: 80px; left: 65px; height: 50px; width: 100px;">
+            <img src="image/images (1).jpg"id="thewallpaper2"style="position: absolute; top: 80px; left: 185px; height: 50px; width: 100px;">12  
+        </div>
+
+        <div id="theam" style="display: none;">
+            <p style="position: absolute; top:45px; left: 20px; z-index: -20;">blue icons : </p>
+            <input type="radio" name="option" id="option1" checked style="width: 40px; height: 40px ; top : 30% ; left: 25%; position: absolute;">
+            <p style="position: absolute; top:45px; left: 150px; z-index: -20;">red icons : </p>
+            <input type="radio" name="option" id="option2" style="width: 40px; height:40px ; top : 30% ; left: 45%; position: absolute; padding-left: 50px ;margin-left: 25px;"> 
+            <div class="back" id = "tocontent3" style="position: absolute; top: 250px; left: 10px ; z-index: 9;"></div>
+            <p style="position: absolute; top:175px;left: 30px; z-index: -20;">Font color : </p>
+            <input class = "setcoler" type="color" id="fontcoler" value="#ffffff" style="left: 60px;top: 200px; z-index: 2; width:60px ; height: 60px;">
+            <p style="position: absolute; top:175px;left: 155px; z-index: -20;">tolbar color:  </p>
+            <input class = "setcoler" type="color" id="barcoler" value="#01163E" style="left: 185px;top: 200px; z-index: 2; width:60px ; height: 60px;">    
+        </div>
+
+
+        <div id = "contentocall" style="display: none;">
+            
+            <div class="back" id = "tocontentcall" style="position: absolute; top: 250px; left: 10px ; z-index: 9;"></div>
+
+            <input class = "setcoler"  type="color" id="colercallmain" value="#0b85d1" style="left: 30px;top: 20px; z-index: 2; width:60px; height:60px;">
+            <p style="padding-left: 5px ; padding-top: 90px ; position: absolute; z-index: 1;font-size: 13px;">
+                main color
+            </p>
+            <input class = "setcoler"  type="color" id="colercallnums" value="#11033d" style="left: 110px;top: 20px; z-index: 2; width:60px; height:60px;"> 
+            <p style="padding-left: 100px ; padding-top: 90px ; position: absolute; z-index: 1;font-size: 13px;">
+                dates color
+            </p>
+            <input class = "setcoler"  type="color" id="colercallbuts" value="#ffffff" style="left: 190px;top: 20px; z-index: 2; width:60px; height:60px;"> 
+            <p style="padding-left: 195px ; padding-top: 90px ; position: absolute; z-index: 1;font-size: 13px;">
+                button color
+            </p>
+            <input class = "setcoler" type="number" min="1" max="2" value="1" id = "positioncall" style="left: 20px; top: 150px; width: 50px; height: 30px; z-index: 2;"> 
+            <p style="padding-left: 75px ; padding-top: 150px ; position: absolute; z-index: 1;">
+                position 4-1 locations
+            </p>
+        
+            <input class = "setcoler" type="checkbox" id = "visablecall" style="left: 30px; top: 230px; width: 30px; height: 30px; z-index: 7;" checked> 
+            <p style="padding-left: 70px ; padding-top: 240px ; position: absolute; z-index: 1;">
+                visable: if desable the calendar will despear
+            </p>
+        </div>
+    </section>
+
+
+
+    <section class ="windoll" id = "clacoletor" style="width: 400px; height: 600 ; font-size: 100px;">
+       <div class="topbar">
+            <div class = "closebutton"id="calck"></div>
+            <div class = "rclosebutton"id="rcalck"></div>
+        </div>
+        <textarea id="calc" readonly style="height: 160px; width: 370px; left: 15px ; top: 30px; font-size: 24px "></textarea> 
+        <button class = "buttonclack" onclick="addvalu(1)">1</button>
+        <button class = "buttonclack" style="left:37%" onclick="addvalu('2')">2</button>
+        <button class = "buttonclack" style="left:59%" onclick="addvalu('3')">3</button>
+        <button class = "buttonclack" style="top: 55%" onclick="addvalu('4')">4</button>
+        <button class = "buttonclack" style="top: 55% ; left:37%" onclick="addvalu('5')">5</button>
+        <button class = "buttonclack" style="top: 55% ; left:59%" onclick="addvalu('6')">6</button>
+        <button class = "buttonclack" style="top: 70%" onclick="addvalu('7')">7</button>
+        <button class = "buttonclack" style="top: 70% ; left: 37%" onclick="addvalu('8')">8</button>
+        <button class = "buttonclack" style="top: 70% ; left: 59%" onclick="addvalu('9')">9</button>
+        <button class = "buttonclack" style="top: 85% ; left: 37%" onclick="addvalu('0')">0</button>
+        <button class = "buttonclack" style="top: 85% ;" onclick="addvalu('+')">+</button>
+        <button class = "buttonclack" style="top: 85% ; left: 59%" onclick="addvalu('-')">-</button>
+        <button class = "buttonclack" style="left:81% ; " onclick="deall()">C</button>
+        <button class = "buttonclack" style="left:81% ; top : 55%" onclick="addvalu('*')">*</button>
+        <button class = "buttonclack" style="left:81% ; top : 70%" onclick="addvalu('/')">/</button>
+        <button class = "buttonclack" style="left:81% ; top : 85%" onclick="claculet()">=</button>
+
+    </section>
+    <section class = "calender"id="backgroud">
+        <div class="calenderin"id="backgroud">
+            <button id = bacbtn style="width: 20px; height: 20px;">
+                <i  class = "fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="monthY" id ="mountY"></div>
+            <button id = nextbtn style="width: 20px; height: 20px;">
+                <i  class= "fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="day" id = "nuums">
+            <div class="daynam">mon</div>
+            <div class="daynam">tus</div>
+            <div class="daynam">Wed</div>
+            <div class="daynam">Thu</div>
+            <div class="daynam">Fri</div>
+            <div class="daynam">Sat</div>
+            <div class="daynam">Sun</div>
+        </div> 
+        <div class="dates" id = "dates"> 
+    </section>
+
+    <section class="windoll" id="windollholl">
+        <div class="topbar" id = topbar>
+            <div class = "closebutton"id="hollclose"></div>
+            <div class = "rclosebutton" id="hollclosetru"></div>
+        </div>
+        <div id="theinternet">
+            <iframe id="theinternet" src="https://wikipedia.org" frameborder="0" style="height: 100% ; width:100% ;"></iframe>
+        </div>
+    </section>
 
     <script src="scripts.js"></script>
 </body>
