@@ -3,7 +3,7 @@ ok this is my web os project . inspired by cyberpunk
 this is my first time using html or js so there are alots of thinks that i did the wrong way.
 
 fornow : there is
-about ,browser , notes , fillemanger,and a musicplayer 
+about ,browser , notes , file manger, music player ,settings and a calculator
 
 THE CODE :
 fill thinks that look ai but they not
@@ -47,3 +47,31 @@ function updateToolbar() {
 so this is not all with ai i changed fill thinks but mthe tolbar logic i got from ai 
 ok other thinks to prove almost no ai used is the open and close function this is streat from the tutorial  the same for the draging i want to give credits to alots of people in stack overflow
 
+
+What is in the setting:
+# clock settings :
+    1. color
+    2.position
+    3.size
+    4.visibility
+# wallpapers:
+    two videos
+    and two images
+# themes:
+    1. you can change the color of the app
+    2. font color
+    3.bar color
+# calendar settings :
+    1. 3 color changes to the dates background and buttons
+    2.position
+    3.visabelity 
+
+Calendar : the code for the calendar is not mine it from a tutorial here is the link: 
+https://youtu.be/OcncrLyddAs?si=N9Ys0o3P3Y71J769
+
+also the  toll bar is working but you can not use the icons that appear to open the app it
+just to show you that you've minimized it
+if you minimize it will keep the position the state of the app 
+# the buttons:
+    red button - full close
+    blue button - minimize 
